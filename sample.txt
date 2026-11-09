@@ -1,0 +1,5 @@
+I love C++ programming.
+I am learning data structures.
+C++ is a powerful language.
+I want to build a search engine.
+Programming requires consistency.
