@@ -1,36 +1,35 @@
-#include <bits/stdc++.h>
-#include <fstream>
+
+#include <iostream>
+#include <filesystem>
 using namespace std;
-// date :- 09-11-2026
-// we focus on building from now maybe it's too basic maybe its not even that good
-// but building consistently is what matters.
-// also gonna note things
+namespace fs = filesystem;
 
 int main()
 {
-    // to open file.
 
-    fstream filevar("sample.txt");
+    string path = "documents";
 
-    // to see if the file exist or not.
-
-    if (!filevar.is_open())
+    if (!fs::exists(path))
     {
-        cout << "File not found!" << "\n";
+        cout << "Folder does not exist!";
         return 0;
     }
-    // we search a word from the txt file.
-    string line;
-    string word = "C++";
-    while (getline(filevar, line))
+
+    for (auto entry : fs::directory_iterator(path))
     {
-        if (line.find(word) != string::npos)
+
+        if (entry.is_regular_file() &&
+            entry.path().extension() == ".txt")
         {
-            cout << line << '\n';
+
+            cout << entry.path().filename() << endl;
         }
     }
-    // closes the file
-    filevar.close();
+
+    for (auto entry : fs::directory_iterator(path))
+    {
+        cout << entry.path().filename() << endl;
+    }
 
     return 0;
 }
